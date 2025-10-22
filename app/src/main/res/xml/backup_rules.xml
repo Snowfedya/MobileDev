@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- TODO: Remove this file if you don't need to customize device-to-device backup. -->
+    <!--
+    This file is used to specify which files are included/excluded from device-to-device backup.
+    https://developer.android.com/guide/topics/data/autobackup#Rules
+    -->
+</full-backup-content>
