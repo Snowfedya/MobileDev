@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "TaskMaster"
+rootProject.name = "Lab1_Project"
 include(":app")

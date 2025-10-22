@@ -1,9 +1,8 @@
-package com.example.taskmaster
+package com.example.lab1_project
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.example.taskmaster.databinding.ActivityMainBinding
+import com.example.lab1_project.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

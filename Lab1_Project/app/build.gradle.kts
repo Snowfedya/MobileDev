@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.taskmaster"
+    namespace = "com.example.lab1_project"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.taskmaster"
+        applicationId = "com.example.lab1_project"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

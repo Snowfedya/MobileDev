@@ -1,9 +1,9 @@
-package com.example.taskmaster
+package com.example.lab1_project
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.taskmaster.databinding.ItemTaskBinding
+import com.example.lab1_project.databinding.ItemTaskBinding
 
 class TaskAdapter(private val tasks: List<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 

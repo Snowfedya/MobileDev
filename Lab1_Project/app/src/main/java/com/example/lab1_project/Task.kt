@@ -1,4 +1,4 @@
-package com.example.taskmaster
+package com.example.lab1_project
 
 data class Task(
     val id: Int,

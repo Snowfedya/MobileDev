@@ -1,4 +1,4 @@
-package com.example.taskmaster
+package com.example.lab1_project
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.taskmaster.databinding.FragmentHomeBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.lab1_project.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
@@ -32,13 +33,13 @@ class HomeFragment : Fragment() {
         Log.d("HomeFragment", "onViewCreated")
 
         val tasks = listOf(
-            Task(1, "Implement Feature X", "As a user, I want to be able to...", "2023-11-15"),
-            Task(2, "Fix Bug Y", "The app crashes when...", "2023-11-20"),
-            Task(3, "Refactor Z", "The code in this module is...", "2023-11-25")
+            Task(1, "Lab 1", "Implement the UI for the application.", "2023-10-26"),
+            Task(2, "Lab 2", "Implement lifecycle logging and data transfer.", "2023-11-02"),
+            Task(3, "Lab 3", "Refactor the application to use Fragments.", "2023-11-09")
         )
 
         binding.tasksRecyclerView.apply {
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(context)
             adapter = TaskAdapter(tasks)
         }
     }

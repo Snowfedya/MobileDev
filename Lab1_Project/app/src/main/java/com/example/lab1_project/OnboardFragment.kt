@@ -1,4 +1,4 @@
-package com.example.taskmaster
+package com.example.lab1_project
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.taskmaster.databinding.FragmentOnboardBinding
+import com.example.lab1_project.databinding.FragmentOnboardBinding
 
 class OnboardFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.example.taskmaster
+package com.example.lab1_project
 
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.taskmaster.databinding.FragmentSignUpBinding
+import com.example.lab1_project.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment() {
 
