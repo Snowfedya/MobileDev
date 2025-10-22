@@ -1,0 +1,5 @@
+# Android Studio
+.gradle
+/build
+/app/build
+/android_sdk

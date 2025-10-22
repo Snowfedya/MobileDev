@@ -4,54 +4,56 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.example.mobiledev.databinding.FragmentSignInBinding
+import androidx.fragment.app.setFragmentResultListener
+import com.google.android.material.textfield.TextInputEditText
 
 class SignInFragment : Fragment() {
 
-    private var _binding: FragmentSignInBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var emailEditText: TextInputEditText
+    private lateinit var passwordEditText: TextInputEditText
 
-    private val args: SignInFragmentArgs by navArgs()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener("signUpRequestKey") { key, bundle ->
+            val user = bundle.getParcelable<User>("user")
+            user?.let {
+                emailEditText.setText(it.email)
+                passwordEditText.setText(it.password)
+                Toast.makeText(requireContext(), "Registration successful!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSignInBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_sign_in, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        emailEditText = view.findViewById(R.id.emailEditText)
+        passwordEditText = view.findViewById(R.id.passwordEditText)
+        val signInButton = view.findViewById<Button>(R.id.signInButton)
+        val signUpButton = view.findViewById<Button>(R.id.signUpButton)
 
-        args.user?.let {
-            binding.emailEditText.setText(it.email)
-            binding.passwordEditText.setText(it.password)
-        }
-
-        binding.signInButton.setOnClickListener {
-            val email = binding.emailEditText.text.toString()
-            val password = binding.passwordEditText.text.toString()
+        signInButton.setOnClickListener {
+            val email = emailEditText.text.toString()
+            val password = passwordEditText.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 Toast.makeText(requireContext(), "Sign in successful", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                (activity as MainActivity).navigateToHome()
             } else {
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
 
-        binding.signUpButton.setOnClickListener {
-            findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+        signUpButton.setOnClickListener {
+            (activity as MainActivity).navigateToSignUp()
         }
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return view
     }
 }
