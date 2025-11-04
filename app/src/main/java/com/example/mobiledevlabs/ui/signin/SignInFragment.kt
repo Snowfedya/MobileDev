@@ -4,19 +4,24 @@ import android.os.Bundle
 import android.util.Patterns
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.mobiledevlabs.data.SessionManager
 import com.example.mobiledevlabs.data.User
 import com.example.mobiledevlabs.databinding.FragmentSignInBinding
 import com.example.mobiledevlabs.ui.base.BaseFragment
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {
 
-    // --- Safe Args: Receiving data in SignIn ---
     private val args: SignInFragmentArgs by navArgs()
+    private lateinit var sessionManager: SessionManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sessionManager = SessionManager(requireContext())
+    }
 
     override fun setupUI() {
         super.setupUI()
 
-        // Pre-fill email from SignUpFragment, if available
         args.user?.let {
             binding.emailEditText.setText(it.email)
         }
@@ -25,10 +30,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
             if (validateInput()) {
                 val email = binding.emailEditText.text.toString()
 
-                // Note: This is a simplified login. In a real app, you would verify the password.
                 val loggedInUser = args.user ?: User.getSampleUsers().first { it.email == email }
 
-                // --- Safe Args: Sending data from SignIn to Home ---
+                // Save session
+                sessionManager.saveUser(loggedInUser)
+
                 val action = SignInFragmentDirections.actionSignInFragmentToHomeFragment(loggedInUser)
                 findNavController().navigate(action)
             }
