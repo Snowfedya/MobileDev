@@ -4,31 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="@drawable/gradient_onboard"
     tools:context=".ui.onboard.OnboardFragment">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/welcome_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to the App!"
-        android:textAppearance="?attr/textAppearanceHeadline4"
-        android:textColor="?attr/colorOnSurface"
-        app:layout_constraintBottom_toTopOf="@+id/next_button"
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_app_placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/welcome_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginTop="64dp"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/welcome_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="Welcome to TransportHub"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/welcome_subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_icon" />
+
+    <TextView
+        android:id="@+id/welcome_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:text="Your ultimate companion for navigating the city. Find the best routes, track public transport in real-time, and get notified about delays."
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/next_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_title" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/next_button"
-        android:layout_width="wrap_content"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
+        android:padding="16dp"
         android:text="Get Started"
+        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+        app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome_text_view" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
