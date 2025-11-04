@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MenuCategory(
+data class User(
     val name: String,
-    val dishes: List<Dish>
+    val email: String,
+    val password: String
 ) : Parcelable

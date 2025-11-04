@@ -13,13 +13,17 @@
         android:theme="@style/Theme.RestaurantApp">
 
         <activity
-            android:name=".HomeActivity"
+            android:name=".OnboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".HomeActivity" />
 
     </application>
 

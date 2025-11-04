@@ -1,56 +1,45 @@
 package com.example.restaurantapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.restaurantapp.databinding.ActivityHomeBinding
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
-    private val TAG = "HomeActivity"
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
-        Log.d(TAG, "onCreate")
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        val menu = createFakeMenu()
+        val adapter = DishAdapter(menu)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, MenuFragment())
-                .commit()
-        }
+        binding.recyclerViewMenu.layoutManager = LinearLayoutManager(this)
+        binding.recyclerViewMenu.adapter = adapter
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart")
-    }
+    private fun createFakeMenu(): List<Dish> {
+        // Используем реальные изображения из res/drawable
+        return listOf(
+            Dish(1, "Margherita Pizza", "Томаты, моцарелла, базилик", 12.50,
+                 R.drawable.margherita_pizza),
 
-    override fun onRestart() {
-        super.onRestart()
-        Log.d(TAG, "onRestart")
-    }
+            Dish(2, "Grilled Salmon", "Стейк лосося с овощами", 18.00,
+                 R.drawable.grilled_salmon),
 
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume")
-    }
+            Dish(3, "Bruschetta", "Тосты с томатами и базиликом", 7.50,
+                 R.drawable.bruschetta),
 
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause")
-    }
+            Dish(4, "Caprese Salad", "Моцарелла, томаты, базилик", 9.00,
+                 R.drawable.caprese_salad),
 
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop")
-    }
+            Dish(5, "Chocolate Cake", "Насыщенный шоколадный десерт", 6.50,
+                 R.drawable.chocolate_cake),
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy")
+            Dish(6, "Garlic Bread", "Чесночный хлеб", 4.00,
+                 R.drawable.garlic_bread)
+        )
     }
 }

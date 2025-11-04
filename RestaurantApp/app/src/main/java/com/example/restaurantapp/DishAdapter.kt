@@ -1,41 +1,51 @@
 package com.example.restaurantapp
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.restaurantapp.databinding.ItemDishBinding // Убедись, что твой layout называется item_dish.xml
 
-class DishAdapter(
-    private val dishes: List<Dish>,
-    private val onItemClick: (Dish) -> Unit
-) : RecyclerView.Adapter<DishAdapter.DishViewHolder>() {
+class DishAdapter(private val dishes: List<Dish>) :
+    RecyclerView.Adapter<DishAdapter.DishViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DishViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_dish, parent, false)
-        return DishViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: DishViewHolder, position: Int) {
-        holder.bind(dishes[position])
-    }
-
-    override fun getItemCount(): Int {
-        return dishes.size
-    }
-
-    inner class DishViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val dishImageView: ImageView = itemView.findViewById(R.id.dishImageView)
-        private val dishNameTextView: TextView = itemView.findViewById(R.id.dishNameTextView)
-
+    /**
+     * ViewHolder (Держатель Элемента)
+     * Он хранит ссылки на View (через binding) и имеет метод .bind()
+     */
+    class DishViewHolder(private val binding: ItemDishBinding) : RecyclerView.ViewHolder(binding.root) {
+        
+        // Этот метод связывает данные (Dish) с UI (binding)
         fun bind(dish: Dish) {
-            dishImageView.setImageResource(dish.imageResource)
-            dishNameTextView.text = dish.name
-            itemView.setOnClickListener {
-                onItemClick(dish)
-            }
+            binding.dishName.text = dish.name
+            binding.dishDescription.text = dish.description
+            binding.dishPrice.text = "$${dish.price}" // Форматируем цену
+            
+            // !!! В ЭТОЙ СТРОКЕ БЫЛА ОШИБКА (ОНА ОТСУТСТВОВАЛА) !!!
+            binding.dishImage.setImageResource(dish.imageResId) 
         }
     }
+
+    /**
+     * Вызывается, когда RecyclerView нужен новый ViewHolder (новая карточка)
+     */
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DishViewHolder {
+        val binding = ItemDishBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return DishViewHolder(binding)
+    }
+
+    /**
+     * Вызывается, чтобы отобразить данные в конкретной позиции (связать ViewHolder)
+     */
+    override fun onBindViewHolder(holder: DishViewHolder, position: Int) {
+        holder.bind(dishes[position]) // Вызываем наш метод bind()
+    }
+
+    /**
+     * Сообщает RecyclerView, сколько всего элементов в списке
+     */
+    override fun getItemCount() = dishes.size
 }
