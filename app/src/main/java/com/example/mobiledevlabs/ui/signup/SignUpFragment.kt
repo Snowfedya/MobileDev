@@ -35,15 +35,23 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
         binding.createAccountButton.setOnClickListener {
             if (validateInput()) {
                 val user = User(
+                    id = System.currentTimeMillis(),
+                    username = binding.nameEditText.text.toString(),
                     email = binding.emailEditText.text.toString(),
-                    username = binding.nameEditText.text.toString()
+                    password = binding.passwordEditText.text.toString(),
+                    gender = User.Gender.valueOf(binding.genderSpinner.selectedItem.toString().uppercase()),
+                    age = binding.ageSpinner.selectedItem.toString().split("-").first().toInt()
                 )
-                findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToHomeFragment(user))
+
+                // --- Safe Args: Sending data from SignUp to SignIn ---
+                val action = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment(user)
+                findNavController().navigate(action)
             }
         }
     }
 
     private fun validateInput(): Boolean {
+        // ... (validation logic remains the same)
         val email = binding.emailEditText.text.toString()
         val username = binding.nameEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
