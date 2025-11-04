@@ -1,33 +1,15 @@
 package com.example.mobiledevlabs.ui.signup
 
-import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.mobiledevlabs.data.User
 import com.example.mobiledevlabs.databinding.FragmentSignUpBinding
+import com.example.mobiledevlabs.ui.base.BaseFragment
 
-class SignUpFragment : Fragment() {
+class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
 
-    private var _binding: FragmentSignUpBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        Log.d("SignUpFragment", "onCreateView")
-        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d("SignUpFragment", "onViewCreated")
+    override fun setupUI() {
+        super.setupUI()
         binding.signUpButton.setOnClickListener {
             if (validateInput()) {
                 val user = User(binding.emailEditText.text.toString(), binding.usernameEditText.text.toString())
@@ -63,11 +45,5 @@ class SignUpFragment : Fragment() {
         }
 
         return true
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.d("SignUpFragment", "onDestroyView")
-        _binding = null
     }
 }
